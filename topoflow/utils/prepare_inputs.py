@@ -290,8 +290,6 @@ class get_inputs():
         self.get_init_channel_depth_grid()
         #-------------------------------------
         self.write_simple_rain_file()
-        print('PRINTING self.NGEN_CSV!!!!!!!!!!!!!!!!!!!!!!')
-        print(self.NGEN_CSV)
         if (self.NGEN_CSV):
             self.subset_ngen_csv_file()        #################
         if not(NO_SOIL):
@@ -1834,7 +1832,6 @@ class get_inputs():
         sp = self.site_prefix   # (e.g. 'cat-84')
         in_file  = self.forcing_dir + sp + '.csv'
         out_file = self.met_dir + self.rain_csv_file
-        print('hellooooo')
         ## out_file = self.met_dir + sp + '_' + self.date_range_str + '.csv'
         #--------------------------------------
         csv_unit     = open( in_file, 'r')
@@ -1845,14 +1842,12 @@ class get_inputs():
         #----------------------------------------
         line = csv_unit.readline()
         new_csv_unit.write( line )
-        print('helloooooo')
-        print(self.start_date_str)
+ 
         while (True):
             line = csv_unit.readline()
             if (line.startswith( self.start_date_str)):
                 new_csv_unit.write( line  )
                 break
-        print("helloooooo")
 
         while (True):
              line = csv_unit.readline()
@@ -1860,17 +1855,13 @@ class get_inputs():
                 # Don't write out this line
                 break
              new_csv_unit.write( line )
-        print("helloooooo")
              
         #-------------------                
         # Close both files
         #-------------------
         csv_unit.close()
         new_csv_unit.close()
-        print("hellooooo")
               
     #   subset_ngen_csv_file()   
     #-------------------------------------------------------------------------------
-    
-    
     
