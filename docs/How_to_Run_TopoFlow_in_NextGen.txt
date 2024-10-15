@@ -3,10 +3,11 @@ October 27-28, 2022
 November 29, 2022 (updated)
 December 3, 2022 (updated)
 July 3, 2024 (updated)
-August 30 (updated)
+August 30, 2024 (updated)
+October 15, 2024 (updated, L. Bolotin)
 
 Note: This assumes that the NextGen repo has been installed.
-      This work used the NextGen version 0.2 from 2022-07-27.
+      This work used the NextGen version from 2023-08-30.
 
 ---------------
  Introduction
@@ -42,20 +43,23 @@ downloaded in CSV format for the catchment from an Amazon S3 bucket.
 ----------------------------------------------------------
  Steps to Run the TopoFlow 3.6 Python Package in NextGen
 ----------------------------------------------------------
-(1) Download the latest TopoFlow 3.6 Python repo from:
-    https://github.com/peckhams/topoflow36
+(1) Download the latest TopoFlow Python repo from:
+    https://github.com/NOAA-OWP/topoflow 
 
-(2) Copy the topoflow36 repo folder into the ngen project tree/repo at:
-    ngen/extern/topoflow36
+(2) Copy the topoflow repo folder into the ngen project tree/repo at:
+    ngen/extern/topoflow (OWP version)
 
-(3) Copy the files in the "ngen_files" subfolder into the corresponding
-    locations in the ngen project tree (e.g. into ngen/data/topoflow, etc.)
-    This includes input files for some example catchments, e.g. cat-209.
-    The cat-209 catchment was used for my AGU 2022 NextGen poster.
+(3) Copy the files for an example test case, located in the 
+    topoflow/topoflow/examples/ngen_data_topoflow subfolder, into the corresponding
+    location in the ngen project tree (e.g. into ngen/data/topoflow/, etc.)
 
-(4) Download CSV forcing files from Amazon S3 bucket for catchments of
-    interest.  If you have an account through Lynker, you can login to
-    the AWS console at:
+(4) Download CSV forcing files for catchments of
+    interest. 
+    (a) All necessary files for the example test case are located in 
+    topoflow/topoflow/examples/cat-11223/forcing.
+    (b) If you have an account through Lynker, you can login to
+    the AWS console to download data for other catchments from an 
+    Amazon S3 bucket:
         https://lynker-aws.signin.aws.amazon.com/console 
     CSV files for HUC01 catchments are in the bucket: formulations-dev
     in the subfolder: forcings/huc01/csv.
@@ -72,13 +76,11 @@ downloaded in CSV format for the catchment from an Amazon S3 bucket.
 (5) In order to run TopoFlow for a catchment, the following files must
     exist in the folder:  ngen/data/topoflow/input_files/cat-**
 
-     Note: These dirs must exist:  __met, __misc, __soil, __topo, Test1_cfg
+     Note: This dir must exist:  Test1_cfg
      Note: Test1_cfg must contain:
-           Test1_multi-bmi.cfg   (no need to edit)
-           Test1_path_info.cfg   (Edit with correct path info.)
-           Test1_time_info.cfg   (Edit with correct time info.)
+           Test1_nextgen.cfg   (Edit with correct path info.)
      Note: There is a utility in topoflow/utils called prepare_inputs.py
-           that can be used to generate these input files.  See the section
+           that can be used to generate all input files.  See the section
            below:  "How to Create TopoFlow Input Files for NextGen Catchments".
 
 (6) Open a terminal window and set PYTHONPATH (for this session).
@@ -95,7 +97,7 @@ downloaded in CSV format for the catchment from an Amazon S3 bucket.
 (7) Change to ngen repo directory, e.g.:
      % cd ~/Dropbox/GitHub/ngen
 
-(8) % ./cmake_build/ngen ./data/topoflow/spatial/catchment_data_HUC01.geojson "cat-84" ./data/topoflow/spatial/nexus_data_HUC01.geojson "" ./data/topoflow/rc_files/tf36_realization_config.json
+(8) % ./cmake_build/ngen ./data/topoflow/spatial/gauge_01073000_catchment_data.geojson "cat-11223" ./data/topoflow/spatial/gauge_01073000_nexus_data.geojson "" ./data/topoflow/rc_files/tf36_realization_config.json
 
     The output should look something like:
 
@@ -124,8 +126,8 @@ Note:  This uses the "multi_bmi" approach described in the
        you have created all of the input files.
 
 % python
->>> from topoflow import main2
->>> main2.run_model( cat_id_str='cat-209', SILENT=False )
+>>> from topoflow import main_ngen
+>>> main_ngen.run_model('./ngen/data/topoflow/input_files/cat-11223/Test1_cfg/Test1_nextgen.cfg')
 
 ------------------------------------------------------------
  How to Create TopoFlow Input Files for NextGen Catchments
