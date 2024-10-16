@@ -1,0 +1,10 @@
+{
+"type": "FeatureCollection",
+"name": "gauge_01073000_nexus_data",
+"crs": { "type": "name", "properties": { "name": "urn:ogc:def:crs:EPSG::5070" } },
+"features": [
+{ "type": "Feature", "properties": { "fid": 1, "id": "nex-11223", "toid": "wb-11223", "hl_id": null, "hl_uri": "NA", "type": "nexus" }, "geometry": { "type": "Point", "coordinates": [ 1997748.512128989910707, 2503671.471870984416455 ] } },
+{ "type": "Feature", "properties": { "fid": 2, "id": "nex-11224", "toid": "wb-11224", "hl_id": null, "hl_uri": "NA", "type": "nexus" }, "geometry": { "type": "Point", "coordinates": [ 2001751.317900971742347, 2506333.955883007962257 ] } },
+{ "type": "Feature", "properties": { "fid": 3, "id": "nex-11225", "toid": "wb-11225", "hl_id": "3169", "hl_uri": "Gages-01073000", "type": "poi" }, "geometry": { "type": "Point", "coordinates": [ 2002360.509031285298988, 2504584.423665382899344 ] } }
+]
+}

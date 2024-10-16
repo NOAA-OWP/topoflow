@@ -3,9 +3,11 @@ October 27-28, 2022
 November 29, 2022 (updated)
 December 3, 2022 (updated)
 July 3, 2024 (updated)
+August 30, 2024 (updated)
+October 15, 2024 (updated, L. Bolotin)
 
 Note: This assumes that the NextGen repo has been installed.
-      This work used the NextGen version 0.2 from 2022-07-27.
+      This work used the NextGen version from 2023-08-30.
 
 ---------------
  Introduction
@@ -41,34 +43,44 @@ downloaded in CSV format for the catchment from an Amazon S3 bucket.
 ----------------------------------------------------------
  Steps to Run the TopoFlow 3.6 Python Package in NextGen
 ----------------------------------------------------------
-(1) Download the latest TopoFlow 3.6 Python repo from:
-    https://github.com/peckhams/topoflow36
+(1) Download the latest TopoFlow Python repo from:
+    https://github.com/NOAA-OWP/topoflow 
 
-(2) Copy the topoflow36 repo folder into the ngen project tree/repo at:
-    ngen/extern/topoflow36
+(2) Copy the topoflow repo folder into the ngen project tree/repo at:
+    ngen/extern/topoflow (OWP version)
 
-(3) Copy the files in the "ngen_files" subfolder into the corresponding
-    locations in the ngen project tree (e.g. into ngen/data/topoflow, etc.)
-    This includes input files for some example catchments, e.g. cat-209.
-    The cat-209 catchment was used for my AGU 2022 NextGen poster.
+(3) Copy the subdirectories for the example test case (cat-11223), located in the 
+    topoflow/topoflow/examples/ngen_data_topoflow subfolder, into the data
+    directory in the ngen project tree (e.g. into ngen/data/topoflow/, etc.)
 
-(4) Download CSV forcing files from Amazon S3 bucket for catchments of
-    interest.  Files are in:  /formulations-dev/forcings/huc01/csv
-    Time span:  2007-01-01 00:00:00 TO  2019-12-31 23:00:00  
-    Copy files (e.g. "cat-209.csv") into:  ngen/data/topoflow/forcing
-    See comments in:  topoflow/utils/ngen/hydrofab_utils.py for
-    information on how to access data in an Amazon S3 bucket.
-
+(4) Download CSV forcing files for catchments of
+    interest. 
+    (a) All necessary files for the example test case are located in 
+    topoflow/topoflow/examples/cat-11223/forcing.
+    (b) If you have an account through Lynker, you can login to
+    the AWS console to download data for other catchments from an 
+    Amazon S3 bucket:
+        https://lynker-aws.signin.aws.amazon.com/console 
+    CSV files for HUC01 catchments are in the bucket: formulations-dev
+    in the subfolder: forcings/huc01/csv.
+    These CSV files provide AORC forcing/met data for the time span:
+        2007-01-01 00:00:00 TO  2019-12-31 23:00:00 
+    You can download a CSV file (e.g. cat-84.csv) from the AWS console
+        and copy it into:   ngen/data/topoflow/forcing
+    You can prepare dot files with your AWS credentials to access
+        files in Lynker S3 buckets from a Python program.
+    See comments in:  topoflow/utils/ngen/hydrofab_utils.py for details
+    As of 2024-08, the module hydrofab_utils.py has new functions for
+        downloading CSV files from the Lynker AWS buckets.
+ 
 (5) In order to run TopoFlow for a catchment, the following files must
     exist in the folder:  ngen/data/topoflow/input_files/cat-**
 
-     Note: These dirs must exist:  __met, __misc, __soil, __topo, Test1_cfg
+     Note: This dir must exist:  Test1_cfg
      Note: Test1_cfg must contain:
-           Test1_multi-bmi.cfg   (no need to edit)
-           Test1_path_info.cfg   (Edit with correct path info.)
-           Test1_time_info.cfg   (Edit with correct time info.)
+           Test1_nextgen.cfg   (Edit with correct path info.)
      Note: There is a utility in topoflow/utils called prepare_inputs.py
-           that can be used to generate these input files.  See the section
+           that can be used to generate all input files.  See the section
            below:  "How to Create TopoFlow Input Files for NextGen Catchments".
 
 (6) Open a terminal window and set PYTHONPATH (for this session).
@@ -85,7 +97,7 @@ downloaded in CSV format for the catchment from an Amazon S3 bucket.
 (7) Change to ngen repo directory, e.g.:
      % cd ~/Dropbox/GitHub/ngen
 
-(8) % ./cmake_build/ngen ./data/topoflow/spatial/catchment_data_HUC01.geojson "cat-84" ./data/topoflow/spatial/nexus_data_HUC01.geojson "" ./data/topoflow/rc_files/tf36_realization_config.json
+(8) % ./cmake_build/ngen ./data/topoflow/spatial/gauge_01073000_catchment_data.geojson "cat-11223" ./data/topoflow/spatial/gauge_01073000_nexus_data.geojson "" ./data/topoflow/rc_files/tf36_realization_config.json
 
     The output should look something like:
 
@@ -108,14 +120,22 @@ Finished 720 timesteps.
 -------------------------------------------------------------
  How to Run TopoFlow for NextGen Catchments Without NextGen
 -------------------------------------------------------------
-Note:  This uses the "multi_bmi" approach described in the
-       Introduction, similar to how TopoFlow runs in NextGen.
-       But you can also run TopoFlow in the usual way once
-       you have created all of the input files.
+Note:   This uses the "multi_bmi" approach described in the
+        Introduction, similar to how TopoFlow runs in NextGen.
+        But you can also run TopoFlow in the usual way once
+        you have created all of the input files.
+Note:   The folder topoflow/topoflow/examples/ngen_data_topoflow/input_files
+        /cat-11223_prerun_example demonstrates how this folder should look once all
+        required Input Files are generated. The /topoflow/topoflow/examples/
+        ngen_data_topoflow/input_files/cat-11223 folder, on the other hand,
+        is pre-configured to allow YOU to test the creation of the input
+        files yourself by executing the code below, assuming Steps 1-3 in
+        "Steps to Run the TopoFlow 3.6 Python Package in NextGen" has been 
+        followed: 
 
 % python
->>> from topoflow import main2
->>> main2.run_model( cat_id_str='cat-209', SILENT=False )
+>>> from topoflow import main_ngen
+>>> main_ngen.run_model('./ngen/data/topoflow/input_files/cat-11223/Test1_cfg/Test1_nextgen.cfg')
 
 ------------------------------------------------------------
  How to Create TopoFlow Input Files for NextGen Catchments
