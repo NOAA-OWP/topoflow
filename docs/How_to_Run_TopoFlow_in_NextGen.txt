@@ -49,9 +49,9 @@ downloaded in CSV format for the catchment from an Amazon S3 bucket.
 (2) Copy the topoflow repo folder into the ngen project tree/repo at:
     ngen/extern/topoflow (OWP version)
 
-(3) Copy the files for an example test case, located in the 
-    topoflow/topoflow/examples/ngen_data_topoflow subfolder, into the corresponding
-    location in the ngen project tree (e.g. into ngen/data/topoflow/, etc.)
+(3) Copy the subdirectories for the example test case (cat-11223), located in the 
+    topoflow/topoflow/examples/ngen_data_topoflow subfolder, into the data
+    directory in the ngen project tree (e.g. into ngen/data/topoflow/, etc.)
 
 (4) Download CSV forcing files for catchments of
     interest. 
@@ -120,10 +120,18 @@ Finished 720 timesteps.
 -------------------------------------------------------------
  How to Run TopoFlow for NextGen Catchments Without NextGen
 -------------------------------------------------------------
-Note:  This uses the "multi_bmi" approach described in the
-       Introduction, similar to how TopoFlow runs in NextGen.
-       But you can also run TopoFlow in the usual way once
-       you have created all of the input files.
+Note:   This uses the "multi_bmi" approach described in the
+        Introduction, similar to how TopoFlow runs in NextGen.
+        But you can also run TopoFlow in the usual way once
+        you have created all of the input files.
+Note:   The folder topoflow/topoflow/examples/ngen_data_topoflow/input_files
+        /cat-11223_prerun_example demonstrates how this folder should look once all
+        required Input Files are generated. The /topoflow/topoflow/examples/
+        ngen_data_topoflow/input_files/cat-11223 folder, on the other hand,
+        is pre-configured to allow YOU to test the creation of the input
+        files yourself by executing the code below, assuming Steps 1-3 in
+        "Steps to Run the TopoFlow 3.6 Python Package in NextGen" has been 
+        followed: 
 
 % python
 >>> from topoflow import main_ngen
