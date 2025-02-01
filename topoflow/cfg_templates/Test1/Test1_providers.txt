@@ -24,11 +24,11 @@ meteorology     tf_meteorology
 diversions      tf_diversions_fraction_method
 channels        tf_channels_diff_wave
 #channels       tf_channels_kin_wave
-snow            tf_snow_degree_day
+#snow            tf_snow_degree_day
 satzone         tf_satzone_darcy_layers
 evap            tf_evap_priestley_taylor
 infil           tf_infil_richards_1d
-ice             tf_ice_gc2d
+#ice             tf_ice_gc2d
 glacier 	tf_glacier_energy_balance
 hydro_model     topoflow_driver
   
