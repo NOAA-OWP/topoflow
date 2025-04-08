@@ -447,8 +447,8 @@ def compute_initial_depth( site_prefix=None, topo_dir=None,
     if not(os.sep in d0_file):
         d0_file2 = topo_dir + d0_file
     rtg_files.write_grid( d, d0_file2, grid_info, RTG_type='FLOAT')
-    print( 'Finished writing file: ')
-    print( d0_file2 )
+    # print( 'Finished writing file: ')
+    # print( d0_file2 )
 
     #---------------------------------    
     # Print min and max values of d0

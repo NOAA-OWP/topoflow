@@ -297,8 +297,8 @@ class framework():
         ########
     
         if not(self.SILENT):
-            print('EMELI: Reading info from comp_repo_file:')
-            print('    ' + comp_repo_file)
+            print('EMELI: Reading info from comp_repo_file')
+            # print('    ' + comp_repo_file)
             print()
         
         #-------------------------------------------
@@ -430,8 +430,8 @@ class framework():
         #-----------------------------------------------------
 
         if not(self.SILENT):
-            print('EMELI: Reading info from provider_file:')
-            print('    ' + self.provider_file)
+            print('EMELI: Reading info from provider_file')
+            # print('    ' + self.provider_file)
 
         self.provider_list = []
         self.comp_set_list = []

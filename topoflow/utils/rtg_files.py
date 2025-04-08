@@ -368,9 +368,9 @@ class rtg_file():
         
         self.time_index += 1   ##############
         
-        if (VERBOSE):     
-            print('Finished writing grid to:')
-            print('  ' + self.file_name)
+        # if (VERBOSE):     
+        #     print('Finished writing grid to:')
+        #     print('  ' + self.file_name)
         
     #   write_grid()
     #----------------------------------------------------------

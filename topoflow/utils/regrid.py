@@ -494,7 +494,7 @@ def regrid_geotiff(in_file=None, out_file=None,
     #------------------
     if (REPORT):
         print('Input grid file:')
-        print('   ' + in_file )
+        # print('   ' + in_file )
         print('   ncols  =', in_ncols )
         print('   nrows  =', in_nrows )
         if (GEO):

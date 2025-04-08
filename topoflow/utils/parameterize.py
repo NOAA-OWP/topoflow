@@ -206,10 +206,10 @@ def get_grid_from_TCA( site_prefix=None, topo_dir=None,
     if not(os.sep in area_file):
         out_file2 = topo_dir + out_file
     rtg_files.write_grid( grid, out_file2, grid_info, RTG_type='FLOAT')
-    if (REPORT):
-        print( 'Finished writing file: ')
-        print( out_file2 )
-        print()
+    # if (REPORT):
+    #     print( 'Finished writing file: ')
+    #     print( out_file2 )
+    #     print()
 
 #   get_grid_from_TCA()
 #------------------------------------------------------------------------

@@ -296,8 +296,8 @@ def get_new_slope_grid(site_prefix=None, case_prefix=None,
     else:
         slope_file2 = slope_file
     rtg_files.write_grid( slope, slope_file2, grid_info, RTG_type='FLOAT')
-    print( 'Finished writing new slope grid to file: ')
-    print( slope_file2 )
+    # print( 'Finished writing new slope grid to file: ')
+    # print( slope_file2 )
     print()
 
     Spmin = slope[ slope > 0 ].min()
